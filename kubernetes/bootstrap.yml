@@ -105,7 +105,7 @@
     
 - name: Install kubelet
   apt:
-    name: kubectl=1.21.0
+    name: kubectl=1.21
     state: present
     allow_unauthenticated: yes
 
