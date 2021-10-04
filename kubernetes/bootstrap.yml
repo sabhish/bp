@@ -123,6 +123,16 @@
     name: kubelet=1.22.2-00
     state: present
     allow_unauthenticated: yes
+    
+- name: Start service kubelet
+  service:
+    name: kubelet
+    state: started
+    
+- name: Restart service kubelet
+  service:
+    name: kubelet
+    state: restarted    
 
 - name: Install kubernetes-cni
   apt:
