@@ -6,7 +6,7 @@
   when: reset_cluster is succeeded
   shell: |
     kubeadm init --service-cidr 10.96.0.0/12 \
-                 --kubernetes-version v1.22.0 \
+                 --kubernetes-version v1.21.0 \
                  --pod-network-cidr 10.244.0.0/16 \
                  --token "{{ lookup('cypher','secret=secret/K8S_TOKEN') }}" \
                  --apiserver-advertise-address {{ ansible_eth0.ipv4.address }}
