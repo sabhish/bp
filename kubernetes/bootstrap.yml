@@ -134,6 +134,12 @@
     name: kubelet
     state: restarted    
 
+- name: Disable swap
+  shell: sudo swapoff -a
+  
+- name: Disable swap in fstab
+  shell: sudo sed -i '/ swap / s/^/#/' /etc/fstab
+
 - name: Install kubernetes-cni
   apt:
     name: kubernetes-cni
