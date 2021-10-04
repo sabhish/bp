@@ -32,13 +32,13 @@
 
 - name: Install kubeadm
   apt:
-    name: kubeadm
+    name: kubeadm=1.21.0-00
     state: present
     allow_unauthenticated: yes
 
 - name: Install kubectl
   apt:
-    name: kubectl
+    name: kubectl=1.21.0-00
     state: present
     allow_unauthenticated: yes
 
@@ -120,7 +120,7 @@
     
 - name: Install kubelet
   apt:
-    name: kubelet=1.21
+    name: kubelet=1.21.0-00
     state: present
     allow_unauthenticated: yes
 
