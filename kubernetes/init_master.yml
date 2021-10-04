@@ -7,15 +7,6 @@
     path: "~/.kube/"
     state: directory
 
-- name: Copy admin.conf to Home directory
-  copy:
-    src: /etc/kubernetes/admin.conf
-    dest: "~/.kube/config"
-    owner: "{{ ansible_user | default(ansible_user_id) }}"
-    group: "{{ ansible_user | default(ansible_user_id) }}"
-    mode: 0755
-    remote_src: true
-
 - name: Init Kubernetes cluster
   when: reset_cluster is succeeded
   shell: |
@@ -30,3 +21,12 @@
     no_proxy: "$no_proxy,.svc,.svc.cluster.local"
 
 
+- name: Copy admin.conf to Home directory
+  when: init_cluster is succeeded
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: "~/.kube/config"
+    owner: "{{ ansible_user | default(ansible_user_id) }}"
+    group: "{{ ansible_user | default(ansible_user_id) }}"
+    mode: 0755
+    remote_src: true
