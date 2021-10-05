@@ -2,6 +2,27 @@
   shell: "kubeadm reset --force"
   register: reset_cluster
 
+- name: Disable swap in fstab
+  shell: sudo sed -i '/ swap / s/^/#/' /etc/fstab
+
+- name: Reboot to disable swap
+  shell: sleep 10 && /sbin/shutdown -r now 'Rebooting to disable swap' 
+  args:
+      removes: /var/run/reboot-required
+  async: 300
+  poll: 0
+  ignore_errors: true
+
+- name: Wait for system to become reachable after reboot
+  wait_for_connection:
+      delay: 60
+      timeout: 300
+
+- name: restart kubelet
+  service:
+    name: kubelet
+    state: restarted
+
 - name: Create Kubernetes config directory
   file:
     path: "~/.kube/"
