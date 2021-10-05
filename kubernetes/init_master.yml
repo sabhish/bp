@@ -2,8 +2,12 @@
   shell: "kubeadm reset --force"
   register: reset_cluster
 
+- name: kubelet requires swap off
+  shell: sudo swapoff -a  
+  
 - name: Disable swap in fstab
-  shell: sudo sed -i '/ swap / s/^/#/' /etc/fstab
+  shell: sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab 
+         
 
 - name: Reboot to disable swap
   shell: sleep 10 && /sbin/shutdown -r now 'Rebooting to disable swap' 
