@@ -32,13 +32,13 @@
 
 - name: Install kubeadm
   apt:
-    name: kubeadm=1.21.2-00
+    name: kubeadm=1.22.2-00
     state: present
     allow_unauthenticated: yes
 
 - name: Install kubectl
   apt:
-    name: kubectl=1.21.2-00
+    name: kubectl=1.22.2-00
     state: present
     allow_unauthenticated: yes
 
@@ -70,7 +70,7 @@
 
 - name: Add cri-o signing key 1
   apt_key:
-    url: "https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:1.21/xUbuntu_20.04/Release.key"
+    url: "https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:1.22/xUbuntu_20.04/Release.key"
     state: present
 
 - name: Add cri-o signing key 2
@@ -87,9 +87,9 @@
 
 - name: Add CRI-O repository 2
   apt_repository:
-    repo: "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/1.21/xUbuntu_20.04/ /"
+    repo: "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/1.22/xUbuntu_20.04/ /"
     state: present
-    filename: devel:kubic:libcontainers:stable:cri-o:1.21
+    filename: devel:kubic:libcontainers:stable:cri-o:1.22
     update_cache: yes
 
 - name: Update system
@@ -140,7 +140,7 @@
 
 - name: Install kubelet
   apt:
-    name: kubelet=1.21.2-00
+    name: kubelet=1.22.2-00
     state: present
     allow_unauthenticated: yes
     
