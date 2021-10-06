@@ -1,6 +1,6 @@
 - name: Add k8s signing key
   apt_key:
-    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     state: present
 
 - name: Add k8s repository
