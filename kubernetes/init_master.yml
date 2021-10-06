@@ -40,6 +40,7 @@
                  --pod-network-cidr 10.244.0.0/16 \
                  --token 1exb8s.2t4k3b5syfc3jfmo \
                  --apiserver-advertise-address {{ ansible_eth0.ipv4.address }}
+                 --ignore-preflight-errors=all
   register: init_cluster
   # See: https://github.com/jetstack/cert-manager/issues/2640 with using kubeadm + calico + cert-manager
   environment:
