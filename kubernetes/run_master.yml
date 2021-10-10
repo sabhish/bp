@@ -1,9 +1,12 @@
 tasks:
 - name: run master
-  shell: |    
-    sudo apt update
-    sudo apt -y upgrade && sudo systemctl reboot
-    sudo apt update
+  shell: "{{ item }}"
+  register: rslt
+  when: rslt.rc == 0
+  with_items:
+    - sudo apt update
+    - sudo apt -y upgrade && sudo systemctl reboot
+    - sudo apt update
     sudo apt -y install curl apt-transport-https curl gnupg lsb-release
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
