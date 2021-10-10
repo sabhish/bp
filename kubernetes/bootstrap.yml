@@ -1,3 +1,8 @@
+- name: Clone git to the server
+    git:
+      repo: https://github.com/cxteamdemo/bp.git
+      dest: {{ ansible_env.HOME }}/
+
 - name: Add k8s signing key
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
