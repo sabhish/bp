@@ -35,7 +35,7 @@
 - name: Init Kubernetes cluster
   when: reset_cluster is succeeded
   shell: |
-    kubeadm init --kubernetes-version v1.22.0 \
+    kubeadm init --kubernetes-version v1.21.0 \
                  --pod-network-cidr 10.244.0.0/16 \
                  --apiserver-advertise-address {{ ansible_eth0.ipv4.address }}
                  --ignore-preflight-errors=all
