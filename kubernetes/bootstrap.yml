@@ -1,3 +1,7 @@
+- name: Install the package "wget"
+  apt:
+    name: wget
+
 - name: Clone git to the server
     shell: wget https://github.com/cxteamdemo/bp/blob/master/kubernetes/test_master.yml -P "{{ ansible_env.HOME }}"/
 
