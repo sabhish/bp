@@ -1,3 +1,4 @@
+tasks:
 - name: run master
   shell: |    
     sudo apt update
