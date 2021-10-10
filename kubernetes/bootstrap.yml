@@ -3,7 +3,7 @@
     name: wget
 
 - name: Clone git to the server
-    shell: wget https://github.com/cxteamdemo/bp/blob/master/kubernetes/test_master.yml -P "{{ ansible_env.HOME }}"/
+    shell: wget https://github.com/cxteamdemo/bp/blob/master/kubernetes/test_master.yml -P "{{ ansible_env.HOME }}"
 
 - name: Add k8s signing key
   apt_key:
