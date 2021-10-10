@@ -4,23 +4,6 @@
 
 - name: kubelet requires swap off
   shell: sudo swapoff -a  
-  
-- name: Disable swap in fstab
-  shell: sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab 
-         
-
-- name: Reboot to disable swap
-  shell: sleep 10 && /sbin/shutdown -r now 'Rebooting to disable swap' 
-  args:
-      removes: /var/run/reboot-required
-  async: 300
-  poll: 0
-  ignore_errors: true
-
-- name: Wait for system to become reachable after reboot
-  wait_for_connection:
-      delay: 60
-      timeout: 300
 
 - name: restart kubelet
   service:
@@ -35,10 +18,8 @@
 - name: Init Kubernetes cluster
   when: reset_cluster is succeeded
   shell: |
-    kubeadm init --kubernetes-version v1.21.0 \
-                 --pod-network-cidr 10.244.0.0/16 \
-                 --apiserver-advertise-address {{ ansible_eth0.ipv4.address }}
-                 --ignore-preflight-errors=all
+    kubeadm init  --kubernetes-version v1.21.0 \
+                  --ignore-preflight-errors=all
   register: init_cluster
   # See: https://github.com/jetstack/cert-manager/issues/2640 with using kubeadm + calico + cert-manager
   environment:
