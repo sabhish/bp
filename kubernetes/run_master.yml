@@ -84,7 +84,7 @@ tasks:
   lineinfile:
     path: /etc/docker/daemon.json
     line: },
-	
+    
 - name: Insert a line at the end of a file6.
   lineinfile:
     path: /etc/docker/daemon.json
