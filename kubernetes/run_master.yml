@@ -39,7 +39,7 @@ tasks:
 
 
 
-- name: run master
+- name: run master - 2
   shell: "{{ item }}"
   register: rslt
   when: rslt.rc == 0
@@ -51,8 +51,7 @@ tasks:
     - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     - sudo apt update
     - sudo apt install -y containerd.io docker-ce docker-ce-cli    
-    - sudo mkdir -p /etc/systemd/system/docker.service.d
-    
+    - sudo mkdir -p /etc/systemd/system/docker.service.d   
     - echo '{' > /etc/docker/daemon.json
     - echo '"exec-opts": ["native.cgroupdriver=systemd"],' >> /etc/docker/daemon.json
     - echo '"log-driver": "json-file",'>> /etc/docker/daemon.json
