@@ -52,14 +52,55 @@ tasks:
     - sudo apt update
     - sudo apt install -y containerd.io docker-ce docker-ce-cli    
     - sudo mkdir -p /etc/systemd/system/docker.service.d   
-    - echo '{' > /etc/docker/daemon.json
-    - echo '"exec-opts": ["native.cgroupdriver=systemd"],' >> /etc/docker/daemon.json
-    - echo '"log-driver": "json-file",'>> /etc/docker/daemon.json
-    - echo '"log-opts": {' >> /etc/docker/daemon.json
-    - echo '"max-size": "100m"' >> /etc/docker/daemon.json
-    - echo '},' >> /etc/docker/daemon.json
-    - echo '"storage-driver": "overlay2"' >> /etc/docker/daemon.json
-    - echo '}' >> /etc/docker/daemon.json 
+
+- name: line insert
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: '{'
+    insertbefore: BOF
+
+
+- name: Insert a line at the end of a file.
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: "exec-opts": ["native.cgroupdriver=systemd"],
+
+- name: Insert a line at the end of a file2.
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: "log-driver": "json-file",
+
+- name: Insert a line at the end of a file3.
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: "log-opts": {
+
+- name: Insert a line at the end of a file4.
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: "max-size": "100m"
+
+- name: Insert a line at the end of a file5.
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: },
+	
+- name: Insert a line at the end of a file6.
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: "storage-driver": "overlay2"
+
+- name: Insert a line at the end of a file7.
+  lineinfile:
+    path: /etc/docker/daemon.json
+    line: }
+    
+
+- name: run master - 3
+  shell: "{{ item }}"
+  register: rslt
+  when: rslt.rc == 0
+  with_items:
     - sudo systemctl daemon-reload 
     - sudo systemctl restart docker
     - sudo systemctl enable docker
