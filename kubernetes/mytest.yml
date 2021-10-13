@@ -16,12 +16,14 @@
      sudo touch /etc/yum.repos.d/kubernetes.repo
 
 
+- name: Add k8s repository
+  apt_repository:
+     repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+     state: present
+     filename: kubernetes
+     update_cache: yes
 
-- name: add repo
-  copy:
-     dest: /etc/yum.repos.d/kubernetes.repo
-     content: |
-        deb https://apt.kubernetes.io/ kubernetes-xenial main
+
 
 - name: test 2
   shell: |
