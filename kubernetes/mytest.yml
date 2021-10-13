@@ -19,7 +19,7 @@
   copy:
      dest: /etc/yum.repos.d/kubernetes.repo
      content: |
-	      deb https://apt.kubernetes.io/ kubernetes-xenial main
+        deb https://apt.kubernetes.io/ kubernetes-xenial main
 
 - name: test 2
   shell: |
