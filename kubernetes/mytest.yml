@@ -2,7 +2,7 @@
 - name: test 1
   shell: |
      sudo apt update
-     sudo apt install -y docker.io apt-get
+     sudo apt install -y docker.io
      sudo systemctl enable docker.service --now
      swapoff -a
      echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
