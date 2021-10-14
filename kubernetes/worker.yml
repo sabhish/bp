@@ -1,4 +1,3 @@
 - hosts: all
   tasks:
-    - include: bootstrap.yml
-    - include: node.yml
+    - include: mytestworker.yml
