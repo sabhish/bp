@@ -31,7 +31,7 @@
      sudo apt-get install -y docker-ce=5:20.10.7~3-0~ubuntu-$(lsb_release -cs) kubelet=1.21.1-00 kubeadm=1.21.1-00 kubectl=1.21.1-00
      sudo apt-mark hold docker-ce kubelet kubeadm kubectl
      swapoff -a
-     sudo kubeadm init --apiserver-advertise-address {{ ansible_eth0.ipv4.address }} --pod-network-cidr 10.244.0.0/16 --ignore-preflight-errors=all
+     sudo kubeadm init --apiserver-advertise-address {{ ansible_eth0.ipv4.address }} --pod-network-cidr 10.244.0.0/16 --ignore-preflight-errors=all --token 1exb8s.2t4k3b5syfc3jfmo
      mkdir -p $HOME/.kube
      sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
      sudo chown $(id -u):$(id -g) $HOME/.kube/config
