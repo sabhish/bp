@@ -40,17 +40,12 @@
      
 - name: create .kube directory
   file:
-    path: /home/$USER/.kube
+    path: $HOME/.kube
     state: directory
-
-- name: configure kubectl
-  become: true
-  copy:
-    src: /etc/kubernetes/admin.conf
-    dest: /home/$USER/.kube/conifg
 
 - name: check kubectl
   shell: |
-    sudo chown $(id -u):$(id -g) /home/$USER/.kube/conifg
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/conifg
     kubectl get nodes
   
