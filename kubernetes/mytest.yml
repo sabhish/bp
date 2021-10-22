@@ -32,8 +32,23 @@
      sudo apt-mark hold docker-ce kubelet kubeadm kubectl
      swapoff -a
      sudo kubeadm init --apiserver-advertise-address {{ ansible_eth0.ipv4.address }} --pod-network-cidr 10.244.0.0/16 --ignore-preflight-errors=all --token 1exb8s.2t4k3b5syfc3jfmo
-     mkdir -p $HOME/.kube
-     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-     sudo chown $(id -u):$(id -g) $HOME/.kube/config
-     sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-     sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+     #mkdir -p $HOME/.kube
+     #sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+     #sudo chown $(id -u):$(id -g) $HOME/.kube/config
+     #sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+     #sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+     
+- name: create .kube directory
+  file:
+    path: /home/$USER/.kube
+    state: directory
+
+- name: configure kubectl
+  become: true
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/$USER/.kube/conifg
+  shell: |
+    sudo chown $(id -u):$(id -g) /home/$USER/.kube/conifg
+    kubectl get nodes
+  
