@@ -50,7 +50,7 @@
     kubectl get nodes
     
 - name: the file
-    template:
-      src: ./kubia.config.j2
-      dest: $HOME/k8-kubia1.yaml
+  template:
+    src: ./kubia.config.j2
+    dest: $HOME/k8-kubia1.yaml
   
