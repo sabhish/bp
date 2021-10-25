@@ -56,6 +56,8 @@
 
 - name: deploy app
   shell: |
+    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
     kubectl create -f $HOME/k8-kubia1.yaml
     sleep 2m
     kubectl get svc
