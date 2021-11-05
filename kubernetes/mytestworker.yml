@@ -1,4 +1,4 @@
-
+---
 - name: test 1
   shell: |
      sudo apt update
@@ -22,8 +22,6 @@
      state: present
      filename: kubernetes
      update_cache: yes
-
-
 
 - name: test 2
   shell: |
