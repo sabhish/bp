@@ -1,3 +1,4 @@
+
 - name: the file
   template:
     src: ./kubia.config.j2
