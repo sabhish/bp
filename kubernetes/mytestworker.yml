@@ -1,3 +1,4 @@
+
 - name: test 1
   shell: |
      sudo apt update
@@ -13,6 +14,7 @@
      curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
      sudo mkdir -p /etc/yum.repos.d
      sudo touch /etc/yum.repos.d/kubernetes.repo
+     
 - name: Add k8s repository
   apt_repository:
      repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
