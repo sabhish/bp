@@ -1,9 +1,13 @@
-- name: Creating an empty file
-    file:
-      path: "/home/$USER/k8-kubia.yaml"
-      state: touch
-
 - name: the file
-    template:
-      src: ./kubia.config.j2
-      dest: $HOME/k8-kubia1.yaml
+  template:
+    src: ./kubia.config.j2
+    dest: $HOME/k8-kubia1.yaml
+
+- name: deploy app
+  shell: |
+    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+    kubectl create -f $HOME/k8-kubia1.yaml
+    sleep 3m
+    kubectl expose rc kubiarc --type=LoadBalancer --name kubia-http
+    kubectl get svc
